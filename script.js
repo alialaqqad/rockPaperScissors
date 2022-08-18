@@ -1,10 +1,16 @@
+function game() {
+    for (let i = 0; i < 5; i++) {
+        playRound(i);
+    }
+}
+
 function playerChoice () {
     let input = prompt("Type rock, paper, or scissors");
     while (input == null) {
         input = prompt("Type rock, paper, or scissors");
     }
     input = input.toUpperCase();
-    console.log(`Player choice ${input}`);
+    console.log(`Player choice: ${input}`);
     return input;
 }
 
@@ -12,25 +18,26 @@ function getComputerChoice () {
     //comp random
     const choicesArray = ["ROCK", "PAPER", "SCISSORS"];
     const randomChoices = Math.floor(Math.random() * choicesArray.length);
-    console.log(`Computer choice ${choicesArray[randomChoices]}`);
+    console.log(`Computer choice: ${choicesArray[randomChoices]}`);
     return choicesArray[randomChoices];
 }
 
 function checkWinner (choiceP, choiceC) {
     if (choiceP === choiceC) {
-        return "Tie";
+        return "Result: Tie";
     } else if ((choiceP === "ROCK" && choiceC == "SCISSORS") || (choiceP === "PAPER" && choiceC == "ROCK") || (choiceP === "SCISSORS" && choiceC == "PAPER")) {
-        return "Player Won";
+        return "Result: Player Won";
     } else {
-        return "Computer Won";
+        return "Result: Computer Won";
     }
     }
 
-function playRound () {
+function playRound (round) {
     const playerSelection = playerChoice();
     const computerSelection = getComputerChoice();
     const winner = checkWinner(playerSelection, computerSelection);
     console.log(winner);
 }
-playRound();
 
+
+game();
