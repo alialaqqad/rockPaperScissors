@@ -62,5 +62,3 @@ function game() {
     }
     return logWin();
 }
-
-game();
