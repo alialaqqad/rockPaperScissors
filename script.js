@@ -2,15 +2,59 @@
 const winners = [];
 const choicesArray = ["rock", "paper", "scissors"];
 
+const rock = document.querySelector('#rock');
+rock.addEventListener('click', playRoundRock);
+
+const paper = document.querySelector('#paper');
+paper.addEventListener('click', playRoundPaper);
+
+const scissors = document.querySelector('#scissors');
+scissors.addEventListener('click', playRoundScissors);
+
 //player input
-function playerChoice () {
-    let input = prompt("Type rock, paper, or scissors");
-    while (input == null) {
-        input = prompt("Type rock, paper, or scissors");
-    }
-    input = input.toLowerCase();
+function playerChoiceRock () {
+    let input = 'rock';
     console.log(`Player choice: ${input}`);
     return input;
+}
+
+function playerChoicePaper () {
+    let input = 'paper';
+    console.log(`Player choice: ${input}`);
+    return input;
+}
+
+function playerChoiceScissors () {
+    let input = 'scissors';
+    console.log(`Player choice: ${input}`);
+    return input;
+}
+
+function playRoundRock () {
+    const playerSelection = playerChoiceRock();
+    const computerSelection = getComputerChoice();
+    const winner = checkWinner(playerSelection, computerSelection);
+    console.log(winner);
+    winners.push(winner);
+    console.log("-----------------------------------------------");
+}
+
+function playRoundPaper () {
+    const playerSelection = playerChoicePaper();
+    const computerSelection = getComputerChoice();
+    const winner = checkWinner(playerSelection, computerSelection);
+    console.log(winner);
+    winners.push(winner);
+    console.log("-----------------------------------------------");
+}
+
+function playRoundScissors () {
+    const playerSelection = playerChoiceScissors();
+    const computerSelection = getComputerChoice();
+    const winner = checkWinner(playerSelection, computerSelection);
+    console.log(winner);
+    winners.push(winner);
+    console.log("-----------------------------------------------");
 }
 
 //computer input random
@@ -44,21 +88,18 @@ function logWin () {
      console.log('Ties', tie);
 }
 
-function playRound (round) {
-    console.log('Round: ', round);
-    const playerSelection = playerChoice();
-    const computerSelection = getComputerChoice();
-    const winner = checkWinner(playerSelection, computerSelection);
-    console.log(winner);
-    winners.push(winner);
-    console.log("-----------------------------------------------");
-}
 
+
+
+
+//------------
 // 5 game rounds
 
-function game() {
-    for (let i = 1; i <= 5; i++) {
-      playRound(i);
-    }
-    return logWin();
-}
+//function game() {
+   // for (let i = 1; i <= 5; i++) {
+    //  playRound(i);
+   // }
+   // return logWin();
+//}
+//playRound();
+//logWin();
