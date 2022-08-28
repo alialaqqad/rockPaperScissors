@@ -1,67 +1,22 @@
+//plan
+//random comp select //(computerSelect function) = done
+// connect comp select with player select //(checkWinner function) = done
+// start the game //the game starts once player select // done
+//take the max between player wins and computer wins // done
+//play round // done
+// what each round will display // done
+//show score // function tallyWins// done
+//end game // displayEnd function// done
+//reset the game
+
 //global variables
-const winners = [];
-const choicesArray = ["rock", "paper", "scissors"];
-
-const rock = document.querySelector('#rock');
-rock.addEventListener('click', playRoundRock);
-
-const paper = document.querySelector('#paper');
-paper.addEventListener('click', playRoundPaper);
-
-const scissors = document.querySelector('#scissors');
-scissors.addEventListener('click', playRoundScissors);
-
-//player input
-function playerChoiceRock () {
-    let input = 'rock';
-    console.log(`Player choice: ${input}`);
-    return input;
-}
-
-function playerChoicePaper () {
-    let input = 'paper';
-    console.log(`Player choice: ${input}`);
-    return input;
-}
-
-function playerChoiceScissors () {
-    let input = 'scissors';
-    console.log(`Player choice: ${input}`);
-    return input;
-}
-
-function playRoundRock () {
-    const playerSelection = playerChoiceRock();
-    const computerSelection = getComputerChoice();
-    const winner = checkWinner(playerSelection, computerSelection);
-    console.log(winner);
-    winners.push(winner);
-    console.log("-----------------------------------------------");
-}
-
-function playRoundPaper () {
-    const playerSelection = playerChoicePaper();
-    const computerSelection = getComputerChoice();
-    const winner = checkWinner(playerSelection, computerSelection);
-    console.log(winner);
-    winners.push(winner);
-    console.log("-----------------------------------------------");
-}
-
-function playRoundScissors () {
-    const playerSelection = playerChoiceScissors();
-    const computerSelection = getComputerChoice();
-    const winner = checkWinner(playerSelection, computerSelection);
-    console.log(winner);
-    winners.push(winner);
-    console.log("-----------------------------------------------");
-}
+let whoWins = [];
+let cArray = ["rock", "paper", "scissors"];
 
 //computer input random
-function getComputerChoice () {
-    const randomChoices = Math.floor(Math.random() * choicesArray.length);
-    console.log(`Computer choice: ${choicesArray[randomChoices]}`);
-    return choicesArray[randomChoices];
+function computerSelect () {
+    const randomChoices = Math.floor(Math.random() * cArray.length);
+    return cArray[randomChoices];
 }
 
 //connect computer random input with user input
@@ -77,29 +32,78 @@ function checkWinner (choiceP, choiceC) {
     }
     }
 
-//results
-function logWin () {
-     let playerWins = winners.filter((winner) => winner == "You won this round").length;
-     let compWins = winners.filter((winner) => winner == "Computer won this round").length;
-     let tie = winners.filter((winner) => winner == "Tie, no win no lose").length;
-     console.log('Results:');
-     console.log('Player wins: ', playerWins);
-     console.log('Computer wins: ', compWins);
-     console.log('Ties', tie);
+//the game starts once player select
+function startGame() {
+    let buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => 
+    button.addEventListener('click', () => {
+        if(button.id) {
+            playRound(button.id);
+        }
+    }))
 }
 
+function checkWins() {
+    let playerWins = whoWins.filter((winner) => winner == "You won this round").length;
+    let compWins = whoWins.filter((winner) => winner == "Computer won this round").length;
+    let tie = whoWins.filter((winner) => winner == "Tie, no win no lose").length;
+    return Math.max(playerWins, compWins, tie);
+}
 
+function playRound (playerChoice) {
+    let wins = checkWins();
+    if(wins >= 5) {
+        return
+    }
+    const computerChoice = computerSelect();
+    const winner = checkWinner(playerChoice, computerChoice);
+    whoWins.push(winner);
+    displayRound(playerChoice, computerChoice, winner);
+    tallyWins();
+    wins=checkWins();
+    if (wins ==5 ){
+        displayEnd();
+    }
+}
 
+function displayRound(playerChoice, computerChoice, winner) {
+    document.querySelector('.playerChoice').textContent = `You chose: ${playerChoice}`;
+    document.querySelector('.computerChoice').textContent = `Computer chose: ${computerChoice}`;
+    document.querySelector('.winner').textContent = `Round winner: ${winner}`;
+}
 
+function tallyWins() {
+    let playerWins = whoWins.filter((winner) => winner == "You won this round").length;
+    let compWins = whoWins.filter((winner) => winner == "Computer won this round").length;
+    let tie = whoWins.filter((winner) => winner == "Tie, no win no lose").length;
+    document.querySelector('.playerScore').textContent = `Score: ${playerWins}`;
+    document.querySelector('.computerScore').textContent = `Score: ${compWins}`;
+    document.querySelector('.ties').textContent = `Ties: ${tie}`;
+}
 
-//------------
-// 5 game rounds
+function displayEnd() {
+    let playerWins = whoWins.filter((winner) => winner == "You won this round").length;
+    if (playerWins == 5) {
+        document.querySelector('.winner').textContent = 'Congrats, you won 5 rounds';
+    } else {
+        document.querySelector('.winner').textContent = 'Sorry, Computer won 5 rounds';
+    }
+    document.querySelector('.reset').style.display = ("flex");
+    document.querySelector('.reset').textContent = 'Play Again?';
+    document.querySelector('.end').textContent = 'Game Over';
+}
 
-//function game() {
-   // for (let i = 1; i <= 5; i++) {
-    //  playRound(i);
-   // }
-   // return logWin();
-//}
-//playRound();
-//logWin();
+function resetGame () {
+    whoWins = [];
+    document.querySelector('.playerScore').textContent = 'Score: 0';
+    document.querySelector('.computerScore').textContent = 'Score: 0';
+    document.querySelector('.ties').textContent = 'Ties: 0';
+    document.querySelector('.winner').textContent = '';
+    document.querySelector('.playerChoice').textContent = '';
+    document.querySelector('.computerChoice').textContent = '';
+    document.querySelector('.reset').textContent = 'Play Again?';
+    document.querySelector('.reset').style.display = "none";
+    document.querySelector('.end').style.display = "none";
+}
+
+startGame();
