@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     background-color: blueviolet;
     border: 20px solid black;
     height: 100vh;
@@ -8,16 +9,55 @@ body {
     align-items: center;
 }
 
-.flex-container {
+.intro {
+    font-size: xx-large;
+    font-weight: bolder;
+    display: flex;
+    text-align: center;
+}
+
+.winnerDiv {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    color: red;
+
 }
 
 button {
     width:150px;
-    height: auto;
+    height:60px;
     background-color: aqua;
     border-radius: 3px;
     font-size: xx-large;
+    cursor:pointer;
+}
+
+.playerSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.computerSelection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset {
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
 }
