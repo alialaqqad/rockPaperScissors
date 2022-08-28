@@ -8,21 +8,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="intro">This is a Rock Paper Scissors game, You can play through the choices below to select, you should win 5 rounds to beat the computer. Good Luck!</div>
     <div class="winnerDiv">
         <h1 class="winner"></h1>
-        <button class="reset" onclick="resetGame()"></button>
+        <button class="reset" onclick="resetGame()">Reset</button>
     </div>
     <div class="playerSection">
-        <button class="pButton" id="rock">Rock</button>
-        <button class="pButton" id="paper">Paper</button>
-        <button class="pButton" id="scissors">scissors</button>
+        <div class="pButton">
+          <button id="rock">Rock</button>
+          <button id="paper">Paper</button>
+          <button id="scissors">Scissors</button>
+         </div>
         <h3 class="playerChoice"></h3>
         <h3 class="playerScore">Score: 0</h3>
     </div>
     <div class="computerSelection">
-        <span class="rock"></span>
-        <span class="paper"></span>
-        <span class="scissors"></span>
+        <div class="spanC">
+         <span class="rock"></span>
+         <span class="paper"></span>
+         <span class="scissors"></span>
+        </div>
         <h3 class="computerChoice"></h3>
         <h3 class="computerScore">Score: 0</h3>
     </div>
