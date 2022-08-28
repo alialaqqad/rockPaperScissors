@@ -2,7 +2,6 @@ body {
     display: flex;
     flex-direction: column;
     background-color: blueviolet;
-    border: 20px solid black;
     height: 100vh;
     margin: 0%;
     justify-content: center;
